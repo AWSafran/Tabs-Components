@@ -7,12 +7,12 @@ class TabLink {
     // Get the custom data attribute on the Link
     // this.data;
     this.data = this.element.dataset.tab;
-    console.log(this.data);
+    //console.log(this.data);
     // Using the custom data attribute get the associated Item element
     // this.itemElement;
     this.itemElement = document.querySelector(`.tabs-item[data-tab='${this.data}']`);
 
-    console.log(this.itemElement);
+    //console.log(this.itemElement);
 
     // console.log(this.itemElement);
     
@@ -56,17 +56,41 @@ class TabItem {
   }
 
   select() {
-    console.log("made it into tab's select function");
+    //console.log("made it into tab's select function");
     // Select all ".tabs-item" elements from the DOM
     // Remove the class "tabs-item-selected" from each element
     document.querySelectorAll(".tabs-item").forEach(function(element){
-      element.classList.remove("tabs-item-selected");
+     
+
+      //Line works as intended VVVVV
+      //element.classList.remove("tabs-item-selected");
+      //Line works as intended ^^^^^^
+     
+      TweenMax.to(element, .25, {x:30, opacity:0});
+       setTimeout(function(){
+          element.classList.remove("tabs-item-selected");
+       }, 250);
+
     })
    
+    //Line works as intended VVVVV
+    //this.element.classList.add("tabs-item-selected");
+    //Line Works as intended ^^^^^^
+
+    function addClass(element){
+      element.classList.add("tabs-item-selected");
+      TweenMax.to(element, .25, {x: -30, opacity:1});
+      console.log("waited successfully");
+    }
+
+     setTimeout( () => addClass(this.element), 250);
+
     // Add a class named "tabs-item-selected" to this element
     //this.element;
-    console.log(this.element);
-    this.element.classList.add("tabs-item-selected");
+    // setTimeout(function{
+    //   this.element.classList.add("tabs-item-selected");
+    //   TweenMax.from(this.element, .25, {x: 30});
+    // });  
   }
 }
 
